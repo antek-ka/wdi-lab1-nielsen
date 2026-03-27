@@ -14,6 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 type Rule = (typeof rules)[number];
 type RuleExample = {
@@ -22,6 +23,7 @@ type RuleExample = {
   title: string;
   image: string;
   description: string;
+  translation?: string;
 };
 
 const hasTranslation = (rule: Rule): rule is Rule & { translation: string } =>
@@ -51,8 +53,8 @@ export default function Home() {
   };
 
   return (
-    <main className="relative bg-background px-4 py-6 lg:grid lg:grid-cols-[280px_1fr] lg:gap-6">
-      <aside className="sticky top-0 z-20 mb-4 bg-background py-2 md:top-4 md:mb-0 md:self-start md:bg-transparent md:py-0">
+    <main className="relative bg-background px-4 pt-48 pb-6 lg:grid lg:grid-cols-[280px_1fr] lg:gap-6 lg:pt-6">
+      <aside className="fixed top-0 left-0 z-20 w-full bg-background py-2 lg:sticky lg:top-4 lg:mb-0 lg:self-start lg:bg-transparent lg:py-0">
         <Card>
           <CardHeader className="pb-1">
             <div className="flex items-center justify-between gap-3">
@@ -69,39 +71,47 @@ export default function Home() {
             </div>
           </CardHeader>
           <CardContent>
-            <nav aria-label="Table of contents" className="flex flex-col gap-3">
+            <nav
+              aria-label="Table of contents"
+              className="relative flex flex-col gap-3"
+            >
               <Button
                 variant="outline"
-                className="w-full justify-start"
+                className="w-full justify-start lg:hidden"
                 onClick={() => setNavOpen((current) => !current)}
                 aria-expanded={navOpen}
                 aria-controls="table-of-contents-list"
               >
                 {navOpen ? "Hide sections" : "Show sections"}
               </Button>
-              {navOpen ? (
+              <div
+                className={cn(
+                  "absolute top-full right-0 left-0 z-30 mt-2 max-h-[60vh] overflow-auto rounded-md border bg-card p-4 shadow-lg lg:static lg:mt-0 lg:max-h-none lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none",
+                  !navOpen && "hidden lg:block",
+                )}
+              >
                 <ul id="table-of-contents-list" className="flex flex-col gap-2">
                   {rules.map((rule) => (
                     <li key={rule.id} className="text-sm">
                       <Link
                         href={`#${rule.id}`}
-                        className="text-primary hover:underline"
+                        className="text-white hover:underline"
                       >
                         {rule.title}
                       </Link>
                     </li>
                   ))}
                 </ul>
-              ) : null}
+              </div>
             </nav>
           </CardContent>
         </Card>
       </aside>
 
-      <section className="flex flex-col items-center gap-4">
+      <section className="flex flex-col items-center gap-4 lg:gap-10">
         <Card
           asChild
-          className="w-full max-w-4xl border-primary/30 bg-linear-to-br from-primary/10 via-background to-background shadow-lg"
+          className="w-full lg:max-w-[80%] mb-10 border-primary/30 bg-linear-to-br from-primary/10 via-background to-background shadow-lg"
           data-component="hero"
         >
           <article>
@@ -109,7 +119,10 @@ export default function Home() {
               <span className="inline-flex w-fit items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-wide text-primary uppercase">
                 Jakob Nielsen · Interaction design
               </span>
-              <CardTitle className="text-3xl leading-tight md:text-4xl">
+              <CardTitle
+                titleTag="h1"
+                className="text-3xl leading-tight md:text-4xl"
+              >
                 10 Usability Heuristics for User Interface Design
               </CardTitle>
             </CardHeader>
@@ -125,7 +138,7 @@ export default function Home() {
         {rules.map((rule) => (
           <Card
             asChild
-            className="w-full max-w-3xl"
+            className="w-full lg:max-w-[80%]"
             data-component="card"
             key={rule.id}
           >
@@ -139,7 +152,7 @@ export default function Home() {
                 {hasTranslation(rule) ? (
                   <section className="mt-5 rounded-md border p-4">
                     <h3 className="text-sm font-semibold tracking-wide uppercase">
-                      Polish translation
+                      PL
                     </h3>
                     <p className="mt-2 text-muted-foreground">
                       {rule.translation}
@@ -178,6 +191,17 @@ export default function Home() {
                               <p className="mt-3 text-muted-foreground">
                                 {example.description}
                               </p>
+                              {"translation" in example &&
+                              example.translation ? (
+                                <div className="mt-4 rounded-md border p-4">
+                                  <h3 className="text-sm font-semibold tracking-wide uppercase">
+                                    PL
+                                  </h3>
+                                  <p className="mt-2 text-muted-foreground">
+                                    {example.translation}
+                                  </p>
+                                </div>
+                              ) : null}
                             </article>
                           </CarouselItem>
                         ))}
