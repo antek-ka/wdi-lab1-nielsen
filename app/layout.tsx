@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { Manrope, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
-
-const manropeSans = Manrope({
-  variable: "--font-manrope-sans",
+const jetbrainsMono = JetBrains_Mono({
+  weight: ["400", "700"],
   subsets: ["latin"],
+  variable: "--font-mono",
+});
+
+const roboto = Roboto({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
@@ -22,8 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("h-full", "antialiased", manropeSans.variable, "font-mono", jetbrainsMono.variable)}>
-      <body className="flex min-h-full flex-col overflow-x-hidden">{children}</body>
+    <html
+      lang="en"
+      className={cn(
+        "h-full",
+        "antialiased",
+        jetbrainsMono.variable,
+        roboto.variable,
+      )}
+    >
+      <body className="flex min-h-full flex-col overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }

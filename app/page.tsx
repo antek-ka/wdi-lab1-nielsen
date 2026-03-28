@@ -16,20 +16,12 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
-type Rule = (typeof rules)[number];
-type RuleExample = {
-  id: number;
-  category: string;
-  title: string;
-  image: string;
-  description: string;
-  translation?: string;
-};
+import type { Rule, Example } from "@/public/content/rules";
 
 const hasTranslation = (rule: Rule): rule is Rule & { translation: string } =>
   "translation" in rule && Boolean(rule.translation);
 
-const hasExamples = (rule: Rule): rule is Rule & { examples: RuleExample[] } =>
+const hasExamples = (rule: Rule): rule is Rule & { examples: Example[] } =>
   "examples" in rule &&
   Array.isArray(rule.examples) &&
   rule.examples.length > 0;
@@ -103,7 +95,7 @@ export default function Home() {
                           className="wrap-break-word text-black hover:underline dark:text-white"
                           onClick={() => setNavOpen((current) => !current)}
                         >
-                          {rule.title}
+                          {rule.id}. {rule.title}
                         </Link>
                       </li>
                     ))}
@@ -127,7 +119,7 @@ export default function Home() {
                 </span>
                 <CardTitle
                   titleTag="h1"
-                  className="text-3xl leading-tight md:text-4xl"
+                  className="text-3xl leading-tight md:text-5xl font-mono font-bold"
                 >
                   10 Usability Heuristics for User Interface Design
                 </CardTitle>
@@ -151,7 +143,7 @@ export default function Home() {
               <article id={`${rule.id}`}>
                 <CardHeader>
                   <CardTitle className="wrap-break-word text-xl">
-                    {rule.title}
+                    {rule.id}. {rule.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -192,7 +184,7 @@ export default function Home() {
                                 <Image
                                   src={example.image}
                                   alt={example.title}
-                                  className="mt-3 aspect-16/10 w-full rounded-md border object-cover"
+                                  className="mt-3 aspect-16/10 w-full rounded-md border object-contain"
                                   width={1000}
                                   height={1000}
                                 />
