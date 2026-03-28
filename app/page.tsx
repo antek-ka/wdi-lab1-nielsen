@@ -53,8 +53,8 @@ export default function Home() {
   };
 
   return (
-    <main className="relative bg-background px-4 pt-48 pb-6 lg:grid lg:grid-cols-[280px_1fr] lg:gap-6 lg:pt-6">
-      <aside className="fixed top-0 left-0 z-20 w-full bg-background py-2 lg:sticky lg:top-4 lg:mb-0 lg:self-start lg:bg-transparent lg:py-0">
+    <main className="relative min-w-0 max-w-full overflow-x-clip bg-background px-4 pt-48 pb-6 lg:grid lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-6 lg:pt-6">
+      <aside className="fixed inset-x-0 top-0 z-20 min-w-0 max-w-full bg-background px-4 py-2 lg:sticky lg:top-4 lg:mb-0 lg:self-start lg:bg-transparent lg:px-0 lg:py-0">
         <Card>
           <CardHeader className="pb-1">
             <div className="flex items-center justify-between gap-3">
@@ -95,7 +95,7 @@ export default function Home() {
                     <li key={rule.id} className="text-sm">
                       <Link
                         href={`#${rule.id}`}
-                        className="text-black dark:text-white hover:underline"
+                        className="wrap-break-word text-black hover:underline dark:text-white"
                       >
                         {rule.title}
                       </Link>
@@ -108,10 +108,10 @@ export default function Home() {
         </Card>
       </aside>
 
-      <section className="flex flex-col items-center gap-4 lg:gap-10">
+      <section className="flex min-w-0 w-full max-w-full flex-col items-center gap-4 lg:gap-10">
         <Card
           asChild
-          className="w-full lg:max-w-[80%] mb-10 border-primary/30 bg-linear-to-br from-primary/10 via-background to-background shadow-lg"
+          className="mb-10 w-full min-w-0 max-w-full border-primary/30 bg-linear-to-br from-primary/10 via-background to-background shadow-lg lg:max-w-[80%]"
           data-component="hero"
         >
           <article>
@@ -138,16 +138,16 @@ export default function Home() {
         {rules.map((rule) => (
           <Card
             asChild
-            className="w-full lg:max-w-[80%]"
+            className="w-full min-w-0 max-w-full lg:max-w-[80%]"
             data-component="card"
             key={rule.id}
           >
             <article id={`${rule.id}`}>
               <CardHeader>
-                <CardTitle className="text-xl">{rule.title}</CardTitle>
+                <CardTitle className="wrap-break-word text-xl">{rule.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p>{rule.description}</p>
+                <p className="wrap-break-word">{rule.description}</p>
 
                 {hasTranslation(rule) ? (
                   <section className="mt-5 rounded-md border p-4">
@@ -167,16 +167,16 @@ export default function Home() {
                     </h3>
                     <Carousel
                       opts={{ align: "start", loop: true }}
-                      className="px-10"
+                      className="min-w-0 max-w-full px-10"
                     >
                       <CarouselContent>
                         {rule.examples.map((example) => (
                           <CarouselItem key={example.id}>
-                            <article className="rounded-md border bg-background p-4">
+                            <article className="min-w-0 max-w-full wrap-break-word rounded-md border bg-background p-4">
                               <p className="text-xs font-semibold tracking-wide text-primary uppercase">
                                 {example.category}
                               </p>
-                              <h4 className="mt-1 text-lg font-semibold">
+                              <h4 className="mt-1 wrap-break-word text-lg font-semibold">
                                 {example.title}
                               </h4>
                               {/* External placeholders; keep native img to avoid image config overhead. */}
