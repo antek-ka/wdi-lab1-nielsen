@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { rules } from "@/public/content/rules";
-import { Moon, Sun } from "lucide-react";
+import { ChevronDown, ChevronUp, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -77,12 +77,13 @@ export default function Home() {
             >
               <Button
                 variant="outline"
-                className="w-full justify-start lg:hidden"
+                className="w-full justify-between lg:hidden"
                 onClick={() => setNavOpen((current) => !current)}
                 aria-expanded={navOpen}
                 aria-controls="table-of-contents-list"
               >
                 {navOpen ? "Hide sections" : "Show sections"}
+                {navOpen ? <ChevronUp /> : <ChevronDown />}
               </Button>
               <div
                 className={cn(
@@ -96,6 +97,7 @@ export default function Home() {
                       <Link
                         href={`#${rule.id}`}
                         className="wrap-break-word text-black hover:underline dark:text-white"
+                        onClick={() => setNavOpen((current) => !current)}
                       >
                         {rule.title}
                       </Link>
@@ -144,7 +146,9 @@ export default function Home() {
           >
             <article id={`${rule.id}`}>
               <CardHeader>
-                <CardTitle className="wrap-break-word text-xl">{rule.title}</CardTitle>
+                <CardTitle className="wrap-break-word text-xl">
+                  {rule.title}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="wrap-break-word">{rule.description}</p>
@@ -167,7 +171,7 @@ export default function Home() {
                     </h3>
                     <Carousel
                       opts={{ align: "start", loop: true }}
-                      className="min-w-0 max-w-full px-10"
+                      className="min-w-0 max-w-full lg:px-10"
                     >
                       <CarouselContent>
                         {rule.examples.map((example) => (
