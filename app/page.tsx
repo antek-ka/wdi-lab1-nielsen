@@ -95,7 +95,7 @@ export default function Home() {
                     <li key={rule.id} className="text-sm">
                       <Link
                         href={`#${rule.id}`}
-                        className="text-white hover:underline"
+                        className="text-black dark:text-white hover:underline"
                       >
                         {rule.title}
                       </Link>
