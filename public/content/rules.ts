@@ -160,12 +160,12 @@ export const rules: Rule[] = [
     examples: [
       {
         id: 1,
-        title: "Booking.com – Confirmation Before Payment (Web)",
-        image: "/images/booking-confirm.png",
+        title: "Confirmation Before Payment (Web)",
+        image: "/images/confirm-payment.jpg",
         description:
-          "Before completing a booking, users must confirm details such as dates and payment. This prevents costly mistakes.",
+          "Before completing a payment, users must confirm that it is intended. This prevents costly mistakes.",
         translation:
-          "Przed finalizacją rezerwacji użytkownik musi potwierdzić szczegóły. Zapobiega to kosztownym błędom.",
+          "Przed finalizacją płatności użytkownik musi potwierdzić, że jest to świadome działanie. Zapobiega to kosztownym błędom.",
       },
       {
         id: 2,
@@ -189,7 +189,7 @@ export const rules: Rule[] = [
       {
         id: 1,
         title: "Google Search – Autocomplete Suggestions (Web)",
-        image: "/images/google-autocomplete.png",
+        image: "/images/google-autocomplete.webp",
         description:
           "Google suggests search queries as users type, reducing the need to remember exact phrases.",
         translation:
@@ -198,7 +198,7 @@ export const rules: Rule[] = [
       {
         id: 2,
         title: "Spotify – Recently Played (Mobile)",
-        image: "/images/spotify-recent.png",
+        image: "/images/spotify-recently-played.webp",
         description:
           "Spotify displays recently played songs, allowing users to recognize rather than recall content.",
         translation:
@@ -217,7 +217,7 @@ export const rules: Rule[] = [
       {
         id: 1,
         title: "Gmail – Keyboard Shortcuts (Web)",
-        image: "/images/gmail-shortcuts.png",
+        image: "/images/gmail-shortcuts.webp",
         description:
           "Gmail supports keyboard shortcuts for advanced users, speeding up interaction.",
         translation:
@@ -273,7 +273,7 @@ export const rules: Rule[] = [
       {
         id: 1,
         title: "Login Form – Clear Error Message (Web)",
-        image: "/images/login-error.png",
+        image: "/images/error-message.png",
         description:
           "A clear message explains what went wrong and how to fix it.",
         translation: "Komunikat jasno wyjaśnia błąd i sposób jego naprawy.",
@@ -281,7 +281,7 @@ export const rules: Rule[] = [
       {
         id: 2,
         title: "Instagram – Incorrect Password Error (Mobile)",
-        image: "/images/instagram-error.png",
+        image: "/images/mobile-error.png",
         description:
           "The app explains the issue and suggests corrective action.",
         translation: "Aplikacja wyjaśnia problem i sugeruje rozwiązanie.",
@@ -306,7 +306,7 @@ export const rules: Rule[] = [
       {
         id: 2,
         title: "Duolingo – Guided Onboarding (Mobile)",
-        image: "/images/duolingo-onboarding.png",
+        image: "/images/duolingo-onboarding.webp",
         description: "Duolingo guides new users through features step by step.",
         translation:
           "Duolingo prowadzi użytkownika krok po kroku przez funkcje aplikacji.",

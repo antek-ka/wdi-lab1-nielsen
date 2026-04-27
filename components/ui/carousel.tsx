@@ -91,7 +91,8 @@ function Carousel({
     api.on("reInit", onSelect);
     api.on("select", onSelect);
     return () => {
-      api?.off("select", onSelect);
+      api.off("reInit", onSelect);
+      api.off("select", onSelect);
     };
   }, [api, onSelect]);
 
@@ -166,22 +167,35 @@ function CarouselPrevious({
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+  const { orientation, scrollPrev, api } = useCarousel();
 
   return (
     <Button
+      type="button"
       data-slot="carousel-previous"
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute size-8 touch-none rounded-full",
         orientation === "horizontal"
           ? "-left-3 top-1/2 -translate-y-1/2"
           : "-top-3 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
-      disabled={!canScrollPrev}
-      onClick={scrollPrev}
+      disabled={!api}
+      onPointerDown={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        scrollPrev();
+      }}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        // Keyboard activation does not fire pointer events.
+        if (event.detail === 0) {
+          scrollPrev();
+        }
+      }}
       {...props}
     >
       <ArrowLeft />
@@ -196,22 +210,35 @@ function CarouselNext({
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
+  const { orientation, scrollNext, api } = useCarousel();
 
   return (
     <Button
+      type="button"
       data-slot="carousel-next"
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute size-8 touch-none rounded-full",
         orientation === "horizontal"
           ? "-right-3 top-1/2 -translate-y-1/2"
           : "-bottom-3 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
-      disabled={!canScrollNext}
-      onClick={scrollNext}
+      disabled={!api}
+      onPointerDown={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        scrollNext();
+      }}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        // Keyboard activation does not fire pointer events.
+        if (event.detail === 0) {
+          scrollNext();
+        }
+      }}
       {...props}
     >
       <ArrowRight />

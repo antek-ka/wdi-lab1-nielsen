@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="relative min-w-0 max-w-full overflow-x-clip bg-background px-4 pt-48 pb-6 lg:grid lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-6 lg:pt-6">
+      <main className="bg-slate-200 dark:bg-background relative min-w-0 max-w-full overflow-x-clip px-4 pt-48 pb-6 lg:grid lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-6 lg:pt-6">
         <aside className="fixed inset-x-0 top-0 z-20 min-w-0 max-w-full bg-background px-4 py-2 lg:sticky lg:top-4 lg:mb-0 lg:self-start lg:bg-transparent lg:px-0 lg:py-0">
           <Card>
             <CardHeader className="pb-1">
@@ -64,9 +64,17 @@ export default function Home() {
               </div>
             </CardHeader>
             <CardContent>
+              {navOpen ? (
+                <button
+                  type="button"
+                  aria-label="Close table of contents"
+                  className="fixed inset-0 z-20 bg-transparent lg:hidden"
+                  onClick={() => setNavOpen(false)}
+                />
+              ) : null}
               <nav
                 aria-label="Table of contents"
-                className="relative flex flex-col gap-3"
+                className="relative z-30 flex flex-col gap-3"
               >
                 <Button
                   variant="outline"
@@ -188,14 +196,19 @@ export default function Home() {
                                   width={1000}
                                   height={1000}
                                 />
-                                <p className="mt-3 text-muted-foreground">
-                                  {example.description}
-                                </p>
+                                <div className="mt-4 p-4">
+                                  <h3 className="text-sm font-semibold tracking-wide uppercase">
+                                    Description
+                                  </h3>
+                                  <p className="mt-2 text-muted-foreground">
+                                    {example.description}
+                                  </p>
+                                </div>
                                 {"translation" in example &&
                                 example.translation ? (
                                   <div className="mt-4 rounded-md border p-4">
                                     <h3 className="text-sm font-semibold tracking-wide uppercase">
-                                      PL
+                                      Description PL
                                     </h3>
                                     <p className="mt-2 text-muted-foreground">
                                       {example.translation}
